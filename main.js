@@ -74,10 +74,16 @@
 
   // ---------- Vorhang + Brand-Intro (nur beim ersten Besuch) ----------
   let seen = false; try { seen = sessionStorage.getItem('eb-intro'); } catch (e) {}
+  const intro = $('.curtain.intro');
+  let introDone = 0; // Zeitpunkt, ab dem der Hero-Text laufen darf
   if (!seen && !reduce) {
     try { sessionStorage.setItem('eb-intro', '1'); } catch (e) {}
     document.body.classList.add('intro-on');
-  }
+    // Vorhang fährt nach der Logo-Animation hoch; der Hero-Text startet kurz davor,
+    // damit die Headline schon steht, wenn der Vorhang die Zeile freigibt.
+    gsap.to(intro, { yPercent: -101, duration: .7, ease: 'power3.inOut', delay: .85, onComplete: () => intro.remove() });
+    introDone = 1.15;
+  } else if (intro) intro.remove();
   $$('a[href$=".html"], a[href*=".html#"], a[href*=".html?"]').forEach(a => a.addEventListener('click', e => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank' || reduce) return;
     const href = a.getAttribute('href'); if (/^https?:/.test(href)) return;
@@ -134,7 +140,7 @@
     const W = c => $$('.w', c);
     // erste Bildunterschrift beim Laden
     gsap.set(caps[0], { autoAlpha: 1 });
-    gsap.fromTo(W(caps[0]), { y: '110%' }, { y: '0%', duration: 1.1, ease: 'expo.out', stagger: .05, delay: seen ? .3 : 1.3 });
+    gsap.fromTo(W(caps[0]), { y: '110%' }, { y: '0%', duration: 1.1, ease: 'expo.out', stagger: .05, delay: introDone ? introDone - .35 : .25 });
     const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: scene, start: 'top top', end: 'bottom bottom', scrub: .8 } });
     const capIn = (i, at, dur = .045) => tl.set(caps[i], { autoAlpha: 1 }, at).fromTo(W(caps[i]), { y: '110%' }, { y: '0%', duration: dur, stagger: dur / W(caps[i]).length, ease: 'power2.out' }, at);
     const capOut = (i, at, dur = .035) => tl.to(W(caps[i]), { y: '-110%', duration: dur, stagger: dur / W(caps[i]).length, ease: 'power2.in' }, at).set(caps[i], { autoAlpha: 0 }, at + dur * 2);
