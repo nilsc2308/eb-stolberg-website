@@ -55,12 +55,13 @@
   });
   const hasHero = !!$('.scene') && !reduce;
   if (hasHero) document.body.classList.add('over-hero');
-  let lastY = 0;
-  ScrollTrigger.create({ onUpdate: () => {
+  // Beim Runterscrollen taucht die Leiste ab, beim Hochscrollen kommt sie sofort zurück.
+  ScrollTrigger.create({ onUpdate: self => {
     const y = scrollY;
     head.classList.toggle('solid', !hasHero || y > 40);
-    head.classList.toggle('hide', y > lastY + 6 && y > 400 && !document.body.classList.contains('menu-open'));
-    if (Math.abs(y - lastY) > 6) lastY = y;
+    if (document.body.classList.contains('menu-open')) { head.classList.remove('hide'); return; }
+    if (self.direction === -1 || y < 300) head.classList.remove('hide');
+    else if (self.direction === 1 && y > 300) head.classList.add('hide');
   } });
   head.classList.toggle('solid', !hasHero || scrollY > 40);
 
@@ -139,9 +140,10 @@
     const capOut = (i, at, dur = .035) => tl.to(W(caps[i]), { y: '-110%', duration: dur, stagger: dur / W(caps[i]).length, ease: 'power2.in' }, at).set(caps[i], { autoAlpha: 0 }, at + dur * 2);
     tl.fromTo('.f1 > img:first-child', { scale: 1.1 }, { scale: 1, duration: .16 }, 0);
     capOut(0, .09);
-    // Blende 1: Wärmebild-Blende (Foto kippt von oben nach unten ins Falschfarbenbild), dann ins nächste Foto
-    tl.to('.f1 .warm', { clipPath: 'inset(0 0 0% 0)', duration: .13 }, .12);
-    tl.to('.f2', { opacity: 1, duration: .07 }, .27);
+    // Blende 1: Tiefen-Blende – Foto 1 zieht sich in die Tiefe zurück, Foto 2 kommt von vorn groß herein
+    tl.to('.f1 > img:first-child', { scale: .86, duration: .16, ease: 'power2.in' }, .14);
+    tl.fromTo('.f2 > img', { scale: 1.55 }, { scale: 1, duration: .18, ease: 'power2.out' }, .14)
+      .to('.f2', { opacity: 1, duration: .09, ease: 'power1.inOut' }, .16);
     capIn(1, .31); capOut(1, .44);
     // Blende 2: Fenster-Blende (Foto 3 wächst aus einem gerahmten Fenster)
     tl.set('.f3', { opacity: 1 }, .47).fromTo('.f3 .win', { scale: .22 }, { scale: 1, duration: .13, ease: 'power2.inOut' }, .47);

@@ -17,7 +17,7 @@ Vorlage/Inhaltsquelle: https://www.eb-stolberg.de (alle Texte, Kontaktdaten, Imp
 | Kontaktformular-Einwilligung | ✅ | Pflicht-Häkchen mit Verweis auf die Datenschutzerklärung; Prüfung im Browser getestet. |
 | AGB | ✅ nicht nötig | Die alte Website hat keine. |
 | Bildrechte | ✅ mit Hinweis | Alle 21 Fotos von Unsplash (Unsplash-Lizenz: kostenlos, auch kommerziell, ohne Namensnennung). Fotografinnen und Fotografen in `img/BILDNACHWEIS.md` und im Impressum genannt. Von der alten Website war kein Foto verwendbar (dort gibt es nur eine Grafik). **Empfehlung: eigene Fotos von Marijan Barlé, Vor-Ort-Terminen und echten Wärmebildern nachreichen.** |
-| Wärmebild-Darstellungen | ✅ gekennzeichnet | Das Wärmebild ist aus dem Foto berechnet, kein echtes Messbild. Steht als Hinweis unter der Lupe, auf der Thermografie-Seite und im Impressum. |
+| Wärmebild-Darstellungen | ✅ gekennzeichnet | Das Wärmebild ist aus dem Foto berechnet, kein echtes Messbild. Es erscheint nur noch in der Lupe und auf der Thermografie-Seite, jeweils mit Hinweis, sowie im Impressum. |
 
 ## 2. Inhalt und Zahlen
 
