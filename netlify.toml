@@ -1,0 +1,62 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://www.openstreetmap.org; form-action 'self'; base-uri 'self'"
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Alte Adressen der bisherigen Website (eb-stolberg.de)
+[[redirects]]
+  from = "/dienstleistungen.html"
+  to = "/index.html#leistungen"
+  status = 301
+[[redirects]]
+  from = "/dienstleistungen-01.html"
+  to = "/energieberatung.html"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-01.html"
+  to = "/energieberatung.html#isfp"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-02.html"
+  to = "/energieausweis.html"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-03.html"
+  to = "/baubegleitung.html"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-05.html"
+  to = "/baubegleitung.html#waermebruecken"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-06.html"
+  to = "/thermografie-feuchteschutz.html"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-07.html"
+  to = "/thermografie-feuchteschutz.html#feuchte"
+  status = 301
+[[redirects]]
+  from = "/energieberatung-bafa-08.html"
+  to = "/wertermittlung.html"
+  status = 301
+[[redirects]]
+  from = "/datenschutzerklaerung.html"
+  to = "/datenschutz.html"
+  status = 301
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
